@@ -23,11 +23,14 @@ jobs:
       # This step installs pip, pipenv, and our dependencies
       - name: Install dependencies
         run: | # Note that there's no reference here — just commands to run
+          python -m venv venv
+          source venv/bin/activate
           python -m pip install --upgrade pip
-          pip install pipenv
-          pipenv install --dev
+          pip install pytest
+
 
       # Now we run our tests
       - name: Test with pytest
         run: |
-          pipenv run pytest
+          source venv/bin/activate
+          pytest
